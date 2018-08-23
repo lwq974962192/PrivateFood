@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright @ 鹿文权
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EEEEEE"
+    >
+
+
+    <RadioGroup
+        android:id="@+id/category_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/category_category_button"
+            android:layout_width="30dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:text="分类"
+            android:textAlignment="textEnd"
+            android:textColor="@color/selector_category_font"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/category_material_button"
+            android:layout_width="30dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="食材"
+            android:textAlignment="textStart"
+            android:textColor="@color/selector_category_font"
+            android:textSize="20dp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/category_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/main_category_search"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="搜食谱、食材" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/category_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

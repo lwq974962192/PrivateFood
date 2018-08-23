@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright @ 鹿文权
+  -->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/boutique_pic"
+        android:layout_width="360dp"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/boutique_title"
+        android:layout_width="320dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#FFF"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/boutique_name"
+        android:layout_width="320dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="160dp"
+        android:text=""
+        android:textColor="#FFF"
+        android:textSize="15dp" />
+
+
+
+</FrameLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright @ 鹿文权
+  -->
+
+<resources>
+    <color name="colorPrimary">#86ccfe</color>
+    <color name="colorPrimaryDark">#86ccfe</color>
+    <color name="colorAccent">#7fc9c3</color>
+    <color name="colorFontChecked">#FFF</color>
+    <color name="colorFontNotChecked">#868686</color>
+    <color name="colorSearchView">#cdcdc4</color>
+    <color name="colorWhiteGray">#E0E0E0</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorListPress">#EEEEEE</color>
+
+</resources>

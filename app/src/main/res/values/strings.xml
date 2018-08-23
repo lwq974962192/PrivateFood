@@ -1,0 +1,9 @@
+<!--
+  ~ Copyright @ 鹿文权
+  -->
+
+<resources>
+    <string name="app_name">Private Food</string>
+    <string name="server">https://hbe.ink:8443/PrivateFood/api</string>
+
+</resources>

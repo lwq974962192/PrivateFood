@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright @ 鹿文权
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@color/colorListPress"/>
+    <item android:state_pressed="false" android:drawable="@color/colorWhiteGray"/>
+    <item android:state_selected="true" android:drawable="@color/colorListPress"/>
+
+
+</selector>
