@@ -56,7 +56,11 @@ public class MoreFragment extends Fragment {
                 SharedPreferences sp = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putBoolean("isLogin", false);
-                editor.commit();
+                editor.apply();
+                SharedPreferences preferences = getActivity().getSharedPreferences("history", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor2 = preferences.edit();
+                editor2.clear();
+                editor2.apply();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
             }

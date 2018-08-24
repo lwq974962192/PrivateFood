@@ -5,6 +5,7 @@
 package com.lwq.otk_lu.privatefood;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -54,7 +56,17 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                intent.putExtra("factor", list.get(i).toString());
+                intent.putExtra("factor", list.get(i));
+                startActivity(intent);
+            }
+        });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                intent.putExtra("factor",item1[i]);
+                list.add(item1[i]);
+                saveList();
                 startActivity(intent);
             }
         });
@@ -65,6 +77,10 @@ public class SearchActivity extends AppCompatActivity {
                 list.clear();
                 adapter2.clear();
                 adapter2.notifyDataSetChanged();
+                SharedPreferences preferences = getSharedPreferences("history", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
 
             }
         });
@@ -105,6 +121,9 @@ public class SearchActivity extends AppCompatActivity {
                             intent.putExtra("factor", editText.getText().toString());
                             list.add(editText.getText().toString());
                             adapter2.notifyDataSetChanged();
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            assert imm != null;
+                            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
                             saveList();
                             startActivity(intent);
 

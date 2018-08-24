@@ -55,6 +55,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -64,6 +66,7 @@ import okhttp3.Call;
 import okhttp3.Request;
 
 public class HomeFragment extends Fragment {
+    private Unbinder unbinder;
     private Banner banner;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
@@ -85,6 +88,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null, false);
+        unbinder = ButterKnife.bind(this, view);
         textView = view.findViewById(R.id.main_search_view);
         gridView = view.findViewById(R.id.main_gridview);
         banner = view.findViewById(R.id.banner);

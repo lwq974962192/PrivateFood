@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorWhiteGray">
 
 
@@ -35,40 +35,38 @@
     </LinearLayout>
 
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ptr_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ptr_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         cube_ptr:ptr_duration_to_close="200"
         cube_ptr:ptr_duration_to_close_header="1000"
         cube_ptr:ptr_keep_header_when_refresh="true"
         cube_ptr:ptr_pull_to_fresh="true"
         cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-        cube_ptr:ptr_resistance="1.7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        cube_ptr:ptr_resistance="1.7">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="515dp"
+            android:layout_height="wrap_content"
             android:visibility="visible">
 
             <ScrollView
                 android:id="@+id/myScrollView"
                 android:layout_width="match_parent"
-                android:layout_height="550dp"
-                android:fillViewport="true"
-                >
+                android:layout_height="540dp"
+                android:fillViewport="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:orientation="horizontal">
@@ -77,30 +75,37 @@
                             android:id="@+id/imageView3"
                             android:layout_width="160dp"
                             android:layout_height="100dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="15dp"
+
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="16dp"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/food_bg"
                             android:gravity="center"
                             android:scaleType="fitXY"
                             android:text="本周流行食谱"
                             android:textColor="@color/colorWhite"
-                            android:visibility="visible" />
+                            android:visibility="visible"
+                            cube_ptr:layout_constraintBottom_toBottomOf="parent"
+                            cube_ptr:layout_constraintStart_toStartOf="parent"
+                            cube_ptr:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/imageView4"
                             android:layout_width="160dp"
                             android:layout_height="100dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="16dp"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/food_bg"
                             android:gravity="center"
                             android:scaleType="fitXY"
                             android:text="热门排行榜"
                             android:textColor="@color/colorWhite"
-                            android:visibility="visible" />
-                    </LinearLayout>
+                            android:visibility="visible"
+                            cube_ptr:layout_constraintBottom_toBottomOf="parent"
+                            cube_ptr:layout_constraintEnd_toEndOf="parent"
+                            cube_ptr:layout_constraintTop_toTopOf="parent" />
+                    </android.support.constraint.ConstraintLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -151,7 +156,7 @@
                         <com.lwq.otk_lu.privatefood.util.MyListView
                             android:id="@+id/main_boutique_list"
                             android:layout_width="match_parent"
-                            android:layout_height="1809dp"
+                            android:layout_height="wrap_content"
                             android:divider="@null">
 
                         </com.lwq.otk_lu.privatefood.util.MyListView>
@@ -165,13 +170,12 @@
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
 
-
     <ImageView
         android:id="@+id/up_button"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/up" />

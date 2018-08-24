@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.tu.loadingdialog.LoadingDialog;
@@ -40,7 +41,7 @@ import okhttp3.Call;
 import okhttp3.Request;
 
 public class SearchResultActivity extends AppCompatActivity {
-    private EditText editText;
+    private TextView editText;
     private Button button;
     private ListView listView;
     private List<SearchResult> list = new ArrayList<>();

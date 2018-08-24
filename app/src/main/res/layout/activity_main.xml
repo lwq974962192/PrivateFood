@@ -24,9 +24,9 @@
             android:id="@+id/radioHomeButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:button="@null"
-            android:layout_marginTop="5dp"
             android:drawableTop="@drawable/selector_home"
             android:gravity="center"
             android:text="首页" />
@@ -35,9 +35,9 @@
             android:id="@+id/radioCategoryButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:button="@null"
-            android:layout_marginTop="5dp"
             android:drawableTop="@drawable/selector_category"
             android:gravity="center"
             android:text="分类" />
@@ -46,9 +46,9 @@
             android:id="@+id/radioMoreButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:button="@null"
-            android:layout_marginTop="5dp"
             android:drawableTop="@drawable/selector_more"
             android:gravity="center"
             android:text="更多" />
@@ -62,6 +62,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/main_radio_group"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
