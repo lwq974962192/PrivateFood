@@ -30,17 +30,19 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class SearchActivity extends AppCompatActivity {
+    private int flag=0;
     private Button cancelButton;
     private Button clearButton;
     private EditText editText;
     private ListView listView;
     private GridView gridView;
     private ArrayAdapter<String> adapter1, adapter2;
-    private String item1[] = {"皮蛋瘦肉", "慕斯", "焖饭", "土豆鲜虾", "咸鸭蛋", "炒饭", "曲奇", "蛋炒饭", "油饼", "豆腐脑"};
-    private String item2[] = {"qq", "川菜", "早餐", "素菜", "七夕节"};
+    private String item1[] = { "慕斯", "焖饭", "土豆鲜虾", "咸鸭蛋", "炒饭", "曲奇", "蛋炒饭", "油饼", "豆腐脑"};
     private List<String> list = new ArrayList<>();
 
     @SuppressLint("ClickableViewAccessibility")
@@ -65,11 +67,14 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
                 intent.putExtra("factor",item1[i]);
-                list.add(item1[i]);
+                checkHistory(item1[i]);
+                //list.add(item1[i]);
+                adapter2.notifyDataSetChanged();
                 saveList();
                 startActivity(intent);
             }
         });
+
         clearButton = findViewById(R.id.search_clear);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +116,7 @@ public class SearchActivity extends AppCompatActivity {
         readList();
         adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, item1);
         adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -119,11 +125,10 @@ public class SearchActivity extends AppCompatActivity {
                         case KeyEvent.ACTION_UP:
                             Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
                             intent.putExtra("factor", editText.getText().toString());
-                            list.add(editText.getText().toString());
-                            adapter2.notifyDataSetChanged();
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             assert imm != null;
                             imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+                            checkHistory(editText.getText().toString());
                             saveList();
                             startActivity(intent);
 
@@ -138,6 +143,7 @@ public class SearchActivity extends AppCompatActivity {
 
         gridView.setAdapter(adapter1);
         listView.setAdapter(adapter2);
+
     }
 
     public void saveList() {
@@ -156,6 +162,24 @@ public class SearchActivity extends AppCompatActivity {
             String listItem = sharedPreferences.getString("item_" + i, null);
             list.add(listItem);
         }
+
+    }
+
+    private void checkHistory(String s) {
+        SharedPreferences sharedPreferences = getSharedPreferences("history", MODE_PRIVATE);
+        Map<String,?> history= sharedPreferences.getAll();
+        Set<? extends Map.Entry<String, ?>> set=history.entrySet();
+        for (Map.Entry<String,?> map:set){
+            if (s.equals(map.getValue()))
+                flag=1;
+        }
+        if (flag==0)
+        {
+            list.add(s);
+            adapter2.notifyDataSetChanged();
+        }
+
+
     }
 }
 
