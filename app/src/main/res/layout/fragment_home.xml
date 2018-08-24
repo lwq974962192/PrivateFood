@@ -39,10 +39,14 @@
         xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ptr_home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        cube_ptr:layout_constraintBottom_toBottomOf="parent"
+        cube_ptr:layout_constraintHorizontal_bias="0.0"
+        cube_ptr:layout_constraintVertical_bias="0.0"
         cube_ptr:ptr_duration_to_close="200"
         cube_ptr:ptr_duration_to_close_header="1000"
         cube_ptr:ptr_keep_header_when_refresh="true"
@@ -58,18 +62,19 @@
             <ScrollView
                 android:id="@+id/myScrollView"
                 android:layout_width="match_parent"
-                android:layout_height="540dp"
+                android:layout_height="wrap_content"
                 android:fillViewport="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/imageView3"
@@ -84,7 +89,7 @@
                             android:scaleType="fitXY"
                             android:text="本周流行食谱"
                             android:textColor="@color/colorWhite"
-                            android:visibility="visible"
+                            android:visibility="gone"
                             cube_ptr:layout_constraintBottom_toBottomOf="parent"
                             cube_ptr:layout_constraintStart_toStartOf="parent"
                             cube_ptr:layout_constraintTop_toTopOf="parent" />
@@ -101,7 +106,7 @@
                             android:scaleType="fitXY"
                             android:text="热门排行榜"
                             android:textColor="@color/colorWhite"
-                            android:visibility="visible"
+                            android:visibility="gone"
                             cube_ptr:layout_constraintBottom_toBottomOf="parent"
                             cube_ptr:layout_constraintEnd_toEndOf="parent"
                             cube_ptr:layout_constraintTop_toTopOf="parent" />
@@ -110,7 +115,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
 
-                        android:layout_height="100dp"
+                        android:layout_height="200dp"
                         android:visibility="visible">
 
                         <com.youth.banner.Banner xmlns:android="http://schemas.android.com/apk/res/android"
@@ -149,22 +154,21 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center"
                             android:text="精品菜单" />
 
                         <com.lwq.otk_lu.privatefood.util.MyListView
                             android:id="@+id/main_boutique_list"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="1800dp"
                             android:divider="@null">
 
                         </com.lwq.otk_lu.privatefood.util.MyListView>
                     </LinearLayout>
-
                 </LinearLayout>
-
-
             </ScrollView>
         </LinearLayout>
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
@@ -172,8 +176,8 @@
 
     <ImageView
         android:id="@+id/up_button"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
