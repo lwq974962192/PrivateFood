@@ -26,11 +26,19 @@ import com.lwq.otk_lu.privatefood.R;
 import com.lwq.otk_lu.privatefood.SearchActivity;
 import com.lwq.otk_lu.privatefood.adapter.CategoryAdapter;
 
+import butterknife.BindView;
+
 public class CategoryFragment extends Fragment {
-    private RadioGroup radioGroup;
-    private ViewPager viewPager;
-    private RadioButton button1, button2;
-    private TextView category_search_view;
+    @BindView(R.id.category_radio_group)
+    RadioGroup radioGroup;
+    @BindView(R.id.category_content)
+    ViewPager viewPager;
+    @BindView(R.id.category_category_button)
+    RadioButton button1;
+    @BindView(R.id.category_material_button)
+    RadioButton button2;
+    @BindView(R.id.category_search_view)
+    TextView category_search_view;
 
     @Nullable
     @Override

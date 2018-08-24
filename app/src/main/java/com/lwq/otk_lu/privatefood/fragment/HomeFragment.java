@@ -34,6 +34,7 @@ import com.lwq.otk_lu.privatefood.LoginActivity;
 import com.lwq.otk_lu.privatefood.MainActivity;
 import com.lwq.otk_lu.privatefood.R;
 import com.lwq.otk_lu.privatefood.SearchActivity;
+import com.lwq.otk_lu.privatefood.SearchResultActivity;
 import com.lwq.otk_lu.privatefood.adapter.BoutiqueAdapter;
 import com.lwq.otk_lu.privatefood.model.Boutique;
 import com.lwq.otk_lu.privatefood.util.MyListView;
@@ -132,6 +133,12 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
     public void getFrame(PtrFrameLayout frame) {
         this.frame = frame;
     }
@@ -143,10 +150,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
-                    default:
+
+                    case 7:
                         MainActivity mainActivity = (MainActivity) getActivity();
                         mainActivity.gotoCategory();
                         break;
+                    default:
+                        Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+                        intent.putExtra("factor", item[i]);
+                        intent.putExtra("from",1);
+                        startActivity(intent);
                 }
             }
         });
@@ -233,6 +246,9 @@ public class HomeFragment extends Fragment {
                         builder.setMessage("网络不佳，请下拉刷新");
                         builder.setPositiveButton("OK", null);
                         builder.show();
+                        if (frame != null) {
+                            frame.refreshComplete();
+                        }
                     }
 
                     @Override

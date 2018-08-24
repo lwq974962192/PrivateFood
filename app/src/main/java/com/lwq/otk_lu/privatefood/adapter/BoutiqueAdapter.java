@@ -22,6 +22,8 @@ import com.zhy.http.okhttp.callback.BitmapCallback;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.Call;
 
 public class BoutiqueAdapter extends BaseAdapter {
@@ -55,11 +57,11 @@ public class BoutiqueAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if (view == null) {
-            holder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.item_boutique, null, false);
-            holder.picView = view.findViewById(R.id.boutique_pic);
-            holder.titleView = view.findViewById(R.id.boutique_title);
-            holder.nameView = view.findViewById(R.id.boutique_name);
+            holder = new ViewHolder(view);
+            //holder.picView = view.findViewById(R.id.boutique_pic);
+            //holder.titleView = view.findViewById(R.id.boutique_title);
+            //holder.nameView = view.findViewById(R.id.boutique_name);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -71,8 +73,15 @@ public class BoutiqueAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
+        @BindView(R.id.boutique_pic)
         ImageView picView;
+        @BindView(R.id.boutique_title)
         TextView titleView;
+        @BindView(R.id.boutique_name)
         TextView nameView;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this,view);
+        }
     }
 }

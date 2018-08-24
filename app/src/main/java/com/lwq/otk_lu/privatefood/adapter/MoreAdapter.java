@@ -18,6 +18,9 @@ import com.lwq.otk_lu.privatefood.model.MoreSetting;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MoreAdapter extends BaseAdapter {
     private List<MoreSetting> list;
     private Context context;
@@ -50,10 +53,10 @@ public class MoreAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if (view == null) {
-            holder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.item_moresetting, null, false);
-            holder.imageView = view.findViewById(R.id.item_setting_pic_view);
-            holder.textView = view.findViewById(R.id.item_setting_text_view);
+            holder = new ViewHolder(view);
+            //holder.imageView = view.findViewById(R.id.item_setting_pic_view);
+            //holder.textView = view.findViewById(R.id.item_setting_text_view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -64,7 +67,12 @@ public class MoreAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
+        @BindView(R.id.item_setting_pic_view)
         ImageView imageView;
+        @BindView(R.id.item_setting_text_view)
         TextView textView;
+        public ViewHolder(View view){
+            ButterKnife.bind(this,view);
+        }
     }
 }

@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -52,6 +53,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private String server = "https://hbe.ink:8443/PrivateFood/api?";
     private LoadingDialog.Builder loadBuilder = null;
     private LoadingDialog dialog = null;
+    private String result;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -70,14 +72,10 @@ public class SearchResultActivity extends AppCompatActivity {
                 return false;
             }
         });
-/*
-        list.add(new SearchResult("title1","content1","https://s1.st.meishij.net/r/50/123/6030800/s6030800_153377626298744.jpg",5461));
-        list.add(new SearchResult("title2","content2","https://s1.st.meishij.net/r/61/235/12871311/s12871311_153412269928741.jpg",8888));
-        list.add(new SearchResult("title3","content3","https://s1.st.meishij.net/r/112/158/2414612/s2414612_153239817994951.jpg",5648654));
-*/
 
         Intent intent = getIntent();
         final String c = intent.getStringExtra("factor");
+
 
         editText.setText(c);
         button.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +102,18 @@ public class SearchResultActivity extends AppCompatActivity {
             }
         });
         getResult(c);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (!result.equals("[]")){
+                    Intent intent1=new Intent(SearchResultActivity.this,DetailActivity.class);
+                    intent1.putExtra("factor",c);
+                    intent1.putExtra("from",1);
+                    startActivity(intent1);
+                }
+
+            }
+        });
 
     }
 
@@ -154,6 +164,9 @@ public class SearchResultActivity extends AppCompatActivity {
             public void onError(Call call, Exception e, int id) {
                 setDialog("获取结果失败");
                 dialog.dismiss();
+                if (frame != null) {
+                    frame.refreshComplete();
+                }
                 builder.show();
             }
 
@@ -161,7 +174,7 @@ public class SearchResultActivity extends AppCompatActivity {
             public void onResponse(String response, int id) {
                 try {
                     object = new JSONObject(response);
-                    String result = object.getString("data");
+                    result = object.getString("data");
                     if (result.equals("[]")) {
                         Toast.makeText(SearchResultActivity.this, "没有结果", Toast.LENGTH_SHORT).show();
                     } else {

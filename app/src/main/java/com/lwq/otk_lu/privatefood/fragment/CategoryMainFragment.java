@@ -4,6 +4,7 @@
 
 package com.lwq.otk_lu.privatefood.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 
 import com.android.tu.loadingdialog.LoadingDialog;
 import com.lwq.otk_lu.privatefood.R;
+import com.lwq.otk_lu.privatefood.SearchActivity;
+import com.lwq.otk_lu.privatefood.SearchResultActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -83,6 +86,14 @@ public class CategoryMainFragment extends Fragment {
                 getFrame(frame);
 
 
+            }
+        });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+                intent.putExtra("factor",item2[i]);
+                startActivity(intent);
             }
         });
         return view;
@@ -205,6 +216,9 @@ public class CategoryMainFragment extends Fragment {
             public void onError(Call call, Exception e, int id) {
                 setDialog("获取分类失败");
                 dialog.dismiss();
+                if (frame != null) {
+                    frame.refreshComplete();
+                }
                 builder.show();
                 // Toast.makeText(getActivity(), "get all category by type failed", Toast.LENGTH_SHORT).show();
             }

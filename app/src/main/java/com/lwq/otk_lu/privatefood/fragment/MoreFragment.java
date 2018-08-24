@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.lwq.otk_lu.privatefood.AboutActivity;
+import com.lwq.otk_lu.privatefood.HistoryActivity;
 import com.lwq.otk_lu.privatefood.LoginActivity;
 import com.lwq.otk_lu.privatefood.R;
 import com.lwq.otk_lu.privatefood.adapter.MoreAdapter;
@@ -63,6 +64,21 @@ public class MoreFragment extends Fragment {
                 editor2.apply();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
+            }
+        });
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent=new Intent(getActivity(), HistoryActivity.class);
+                switch (i){
+                    case 0:
+                        intent.putExtra("flag",0);
+                        break;
+                    case 1:
+                        intent.putExtra("flag",1);
+                        break;
+                }
+                startActivity(intent);
             }
         });
         listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -18,6 +18,9 @@ import com.lwq.otk_lu.privatefood.model.SearchResult;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SearchResultAdapter extends BaseAdapter {
     private List<SearchResult> list;
     private Context context;
@@ -49,12 +52,12 @@ public class SearchResultAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if (view == null) {
-            holder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.item_search_result, null, false);
-            holder.imageView = view.findViewById(R.id.result_pic_view);
-            holder.contentView = view.findViewById(R.id.result_content_view);
-            holder.titleView = view.findViewById(R.id.result_title_view);
-            holder.viewView = view.findViewById(R.id.result_view_view);
+            holder = new ViewHolder(view);
+            //holder.imageView = view.findViewById(R.id.result_pic_view);
+            //holder.contentView = view.findViewById(R.id.result_content_view);
+            //holder.titleView = view.findViewById(R.id.result_title_view);
+            //holder.viewView = view.findViewById(R.id.result_view_view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -67,9 +70,17 @@ public class SearchResultAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
+        @BindView(R.id.result_pic_view)
         ImageView imageView;
+        @BindView(R.id.result_title_view)
         TextView titleView;
+        @BindView(R.id.result_content_view)
         TextView contentView;
+        @BindView(R.id.result_view_view)
         TextView viewView;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this,view);
+        }
     }
 }
