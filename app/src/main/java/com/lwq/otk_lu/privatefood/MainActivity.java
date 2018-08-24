@@ -8,18 +8,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.lwq.otk_lu.privatefood.fragment.CategoryFragment;
 import com.lwq.otk_lu.privatefood.fragment.HomeFragment;
 import com.lwq.otk_lu.privatefood.fragment.MoreFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
-    private RadioGroup radioGroup;
-    private LinearLayout content;
+    @BindView(R.id.main_radio_group)
+    RadioGroup radioGroup;
     private FragmentManager manager;
     private HomeFragment homeFragment;
     private MoreFragment moreFragment;
@@ -29,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        content = findViewById(R.id.main_content);
-        radioGroup = findViewById(R.id.main_radio_group);
+        ButterKnife.bind(this);
         manager = getSupportFragmentManager();
         radioGroupClick();
         initHome();

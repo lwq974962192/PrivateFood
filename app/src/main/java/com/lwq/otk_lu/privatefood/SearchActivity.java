@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,14 @@ public class SearchActivity extends AppCompatActivity {
         editText = findViewById(R.id.search_view);
         gridView = findViewById(R.id.search_gridview);
         listView = findViewById(R.id.search_history_list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                intent.putExtra("factor", list.get(i).toString());
+                startActivity(intent);
+            }
+        });
         clearButton = findViewById(R.id.search_clear);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
