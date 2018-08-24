@@ -140,7 +140,6 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         gridView.setAdapter(adapter1);
         listView.setAdapter(adapter2);
 
@@ -162,7 +161,6 @@ public class SearchActivity extends AppCompatActivity {
             String listItem = sharedPreferences.getString("item_" + i, null);
             list.add(listItem);
         }
-
     }
 
     private void checkHistory(String s) {

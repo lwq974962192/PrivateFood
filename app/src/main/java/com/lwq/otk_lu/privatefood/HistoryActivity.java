@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,7 +54,15 @@ public class HistoryActivity extends AppCompatActivity {
         }
         initList();
         initListListener();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        list.clear();
+        initList();
+        Log.d("lotk"," onresume");
+        adapter.notifyDataSetChanged();
     }
 
     private void initListListener() {

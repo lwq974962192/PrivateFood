@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ import butterknife.OnClick;
 
 public class DetailActivity extends AppCompatActivity {
     private int isLiked = 0;
-    private int flag=0;
+    private int position=-1;
     private String factor;
     @BindView(R.id.detail_Name_view)
     TextView nameView;
@@ -45,10 +46,11 @@ public class DetailActivity extends AppCompatActivity {
         if (from==1){
             checkHistory();
         }
-        checkLiked();
+        checkIsLiked();
     }
 
     private void checkHistory() {
+        int flag=0;
         SharedPreferences sharedPreferences = getSharedPreferences("browsing_history", MODE_PRIVATE);
         Map<String,?> history= sharedPreferences.getAll();
         Set<? extends Map.Entry<String, ?>> set=history.entrySet();
@@ -61,6 +63,18 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+    private boolean checkLiked(){
+        int flag=0;
+        SharedPreferences sharedPreferences = getSharedPreferences("liked", MODE_PRIVATE);
+        Map<String,?> history= sharedPreferences.getAll();
+        Set<? extends Map.Entry<String, ?>> set=history.entrySet();
+        for (Map.Entry<String,?> map:set){
+            if (factor.equals(map.getValue()))
+                flag=1;
+        }
+        return flag == 0;
+    }
+
     private void outToHistory() {
         SharedPreferences sharedPreferences = getSharedPreferences("browsing_history", MODE_PRIVATE);
         int history_num = sharedPreferences.getInt("history_num", 0);
@@ -70,6 +84,65 @@ public class DetailActivity extends AppCompatActivity {
         editor.putInt("history_num", history_num);
         editor.putString("item_" + index, factor);
         editor.apply();
+    }
+
+
+
+    private void delFromLiked() {
+        if (!checkLiked()){
+            SharedPreferences sharedPreferences = getSharedPreferences("liked", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            int likedNum = sharedPreferences.getInt("liked_num", 0);
+            for (int i = 0; i < likedNum; i++) {
+                if (factor.equals(sharedPreferences.getString("item_" + i, null))){
+                    position=i;
+                    break;
+                }
+            }
+            Log.d("lotk"," pos "+position);
+            if (position==likedNum-1){
+                if (position==0){
+                    editor.clear();
+                }else {
+                    editor.remove("item_"+position);
+                    editor.putInt("liked_num",position);
+                }
+            }else {
+                for (int i=position;i<likedNum-1;i++){
+                    editor.putString("item_"+i,sharedPreferences.getString("item_"+i+1,null));
+
+                }
+                editor.putInt("liked_num",likedNum-1);
+                editor.remove("item_"+(likedNum-1));
+            }
+            editor.apply();
+        }
+
+    }
+
+    private void outToLiked() {
+        if (checkLiked()){
+            SharedPreferences sharedPreferences = getSharedPreferences("liked", MODE_PRIVATE);
+            int liked_num = sharedPreferences.getInt("liked_num", 0);
+            SharedPreferences.Editor editor = getSharedPreferences("liked", MODE_PRIVATE).edit();
+            liked_num += 1;
+            int index = liked_num - 1;
+            editor.putInt("liked_num", liked_num);
+            editor.putString("item_" + index, factor);
+            editor.apply();
+        }
+    }
+
+    private void checkIsLiked() {
+        SharedPreferences sharedPreferences = getSharedPreferences("liked", MODE_PRIVATE);
+        Map<String,?> likes= sharedPreferences.getAll();
+
+        Set<? extends Map.Entry<String, ?>> set=likes.entrySet();
+        for (Map.Entry<String,?> map:set){
+            if (factor.equals(map.getValue())){
+                likeButton.setActivated(true);
+            }
+        }
     }
 
     @OnClick(R.id.detail_back_button)
@@ -86,36 +159,11 @@ public class DetailActivity extends AppCompatActivity {
                 outToLiked();
                 break;
             case 1:
-                //likeButton.setActivated(false);
-                //isLiked = 0;
-                //delFromLiked();
+                delFromLiked();
+                likeButton.setActivated(false);
+                isLiked = 0;
+
                 break;
-        }
-    }
-
-    private void delFromLiked() {
-
-    }
-
-    private void outToLiked() {
-        SharedPreferences sharedPreferences = getSharedPreferences("liked", MODE_PRIVATE);
-        int liked_num = sharedPreferences.getInt("liked_num", 0);
-        SharedPreferences.Editor editor = getSharedPreferences("liked", MODE_PRIVATE).edit();
-        liked_num += 1;
-        int index = liked_num - 1;
-        editor.putInt("liked_num", liked_num);
-        editor.putString("item_" + index, factor);
-        editor.apply();
-    }
-
-    private void checkLiked() {
-        SharedPreferences sharedPreferences = getSharedPreferences("liked", MODE_PRIVATE);
-        Map<String,?> likes= sharedPreferences.getAll();
-        Set<? extends Map.Entry<String, ?>> set=likes.entrySet();
-        for (Map.Entry<String,?> map:set){
-            if (factor.equals(map.getValue())){
-                likeButton.setActivated(true);
-            }
         }
     }
 }
