@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright @ 鹿文权
+  -->
+
+<in.srain.cube.views.ptr.PtrClassicFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ptr_category2"
+    cube_ptr:ptr_duration_to_close="200"
+    cube_ptr:ptr_duration_to_close_header="1000"
+    cube_ptr:ptr_keep_header_when_refresh="true"
+    cube_ptr:ptr_pull_to_fresh="true"
+    cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+    cube_ptr:ptr_resistance="1.7"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <ListView
+            android:id="@+id/category_detail_sort2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="5dp"
+            android:layout_weight="5"
+
+            android:listSelector="@drawable/selector_list"
+            android:background="@color/colorWhiteGray" />
+
+        <GridView
+            android:id="@+id/category_detail_content2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:numColumns="3"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:background="#EEEEEE"
+            />
+    </LinearLayout>
+
+
+
+
+</in.srain.cube.views.ptr.PtrClassicFrameLayout>

@@ -74,9 +74,9 @@ public class LoginActivity extends AppCompatActivity {
                     .addParams("flag", "login")
                     .addParams("username", username)
                     .addParams("password", passwd).build()
-                    .connTimeOut(5000)
-                    .readTimeOut(5000)
-                    .writeTimeOut(5000)
+                    .connTimeOut(1000)
+                    .readTimeOut(1000)
+                    .writeTimeOut(1000)
                     .execute(new StringCallback() {
 
                         @Override
@@ -105,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
 
                             builder.setPositiveButton("OK", null);
                             builder.show();
-                            Toast.makeText(LoginActivity.this, "login failed", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -125,7 +124,6 @@ public class LoginActivity extends AppCompatActivity {
                                 builder.setMessage(result_msg);
                                 builder.setPositiveButton("OK", null);
                                 builder.show();
-                                Toast.makeText(LoginActivity.this, result_msg, Toast.LENGTH_SHORT).show();
                             } else {
                                 SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sp.edit();
@@ -140,7 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 editor.putBoolean("isLogin", true);
                                 editor.commit();
-                                Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
                             }

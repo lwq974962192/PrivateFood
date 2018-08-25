@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,14 +57,7 @@ public class HistoryActivity extends AppCompatActivity {
         initListListener();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        list.clear();
-        initList();
-        Log.d("lotk"," onresume");
-        adapter.notifyDataSetChanged();
-    }
+
 
     private void initListListener() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,16 +66,24 @@ public class HistoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(HistoryActivity.this, DetailActivity.class);
                 intent.putExtra("factor",list.get(i));
                 intent.putExtra("from",0);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode==1){
+            initList();
+        }
+    }
+
     private void initList() {
+        list.clear();
         switch (flag){
             case 0:
                 initLikedList();
-
                 break;
             case 1:
                 initHistoryList();

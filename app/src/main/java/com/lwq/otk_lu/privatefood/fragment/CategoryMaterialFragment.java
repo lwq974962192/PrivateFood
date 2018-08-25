@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.tu.loadingdialog.LoadingDialog;
@@ -29,7 +30,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.util.List;
 import java.util.Objects;
 
 import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
@@ -43,7 +46,7 @@ public class CategoryMaterialFragment extends Fragment {
     private String server = "https://hbe.ink:8443/PrivateFood/api?";
     private GridView gridView;
     private ListView listView;
-    private String result = "", item1[], item2[];
+    private String result = "", item1[], item2[],emtpy[];
     private ArrayAdapter<String> adapter1, adapter2;
     private AlertDialog.Builder builder = null;
     private PtrFrameLayout frame;
@@ -55,12 +58,12 @@ public class CategoryMaterialFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_category_detail, null, false);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_category_detail2, null, false);
         getAllFoodType();
         builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
-        listView = view.findViewById(R.id.category_detail_sort);
-        gridView = view.findViewById(R.id.category_detail_content);
-        ptr = view.findViewById(R.id.ptr_category);
+        listView = view.findViewById(R.id.category_detail_sort2);
+        gridView = view.findViewById(R.id.category_detail_content2);
+        ptr = view.findViewById(R.id.ptr_category2);
         final PtrClassicDefaultHeader header = new PtrClassicDefaultHeader(getActivity());
         header.setPadding(0, PtrLocalDisplay.dp2px(15), 0, 0);
 
@@ -75,7 +78,7 @@ public class CategoryMaterialFragment extends Fragment {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 item2 = new String[0];
-                adapter2 = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), android.R.layout.simple_list_item_1, item2);
+                adapter2 = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), R.layout.item_list, item2);
                 gridView.setAdapter(adapter2);
                 adapter2.notifyDataSetChanged();
                 getAllFoodType();
@@ -115,7 +118,9 @@ public class CategoryMaterialFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 clearAllChild();
-                listView.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.colorListPress));
+                //Toast.makeText(getActivity(), "listview num "+listView.getChildCount()+" you clicked "+i, Toast.LENGTH_SHORT).show();
+                //listView.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.colorListPress));
+                listView.getChildAt(i-listView.getFirstVisiblePosition()).setBackgroundColor(getResources().getColor(R.color.colorListPress));
                 getFoodByType(i);
             }
 
@@ -132,9 +137,9 @@ public class CategoryMaterialFragment extends Fragment {
                 .addParams("flag", "getfoodbytype")
                 .addParams("food_type", item1[i])
                 .build()
-                .connTimeOut(5000)
-                .readTimeOut(5000)
-                .writeTimeOut(5000)
+                .connTimeOut(1000)
+                .readTimeOut(1000)
+                .writeTimeOut(1000)
                 .execute(new StringCallback() {
 
                     private JSONArray array;
@@ -210,8 +215,11 @@ public class CategoryMaterialFragment extends Fragment {
                 super.onAfter(id);
                 dialog.dismiss();
                 if (item1 != null) {
+
                     adapter1 = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), android.R.layout.simple_list_item_1, item1);
                     listView.setAdapter(adapter1);
+                    //10
+                    //Toast.makeText(getActivity(), "adapter num +"+adapter1.getCount(), Toast.LENGTH_SHORT).show();
                     if (frame != null) {
                         frame.refreshComplete();
                     }
@@ -234,11 +242,11 @@ public class CategoryMaterialFragment extends Fragment {
             public void onResponse(String response, int id) {
                 try {
                     object = new JSONObject(response);
-                    result = object.getString("data");
                     array = object.getJSONArray("data");
                     item1 = new String[array.length()];
+                    Toast.makeText(getActivity(), "array length "+array.length(), Toast.LENGTH_SHORT).show();
                     for (int i = 0; i < array.length(); i++) {
-                        item1[i] = array.get(i).toString();
+                        item1[i] = array.get(i).toString();//11
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

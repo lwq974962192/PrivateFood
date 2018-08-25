@@ -54,14 +54,22 @@ public class MoreFragment extends Fragment {
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sp = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putBoolean("isLogin", false);
-                editor.apply();
-                SharedPreferences preferences = getActivity().getSharedPreferences("history", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor2 = preferences.edit();
+                SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                editor1.putBoolean("isLogin", false);
+                editor1.apply();
+                SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("history", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
                 editor2.clear();
                 editor2.apply();
+                SharedPreferences sharedPreferences3 = getActivity().getSharedPreferences("browsing_history", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor3 = sharedPreferences3.edit();
+                editor3.clear();
+                editor3.apply();
+                SharedPreferences sharedPreferences4 = getActivity().getSharedPreferences("liked", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor4 = sharedPreferences4.edit();
+                editor4.clear();
+                editor4.apply();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
             }

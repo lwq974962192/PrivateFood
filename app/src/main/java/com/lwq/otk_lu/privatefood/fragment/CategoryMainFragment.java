@@ -114,7 +114,7 @@ public class CategoryMainFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 clearAllChild();
-                listView.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.colorListPress));
+                listView.getChildAt(i-listView.getFirstVisiblePosition()).setBackgroundColor(getResources().getColor(R.color.colorListPress));
                 getCategoryByType(i);
             }
 
@@ -131,9 +131,9 @@ public class CategoryMainFragment extends Fragment {
                 .addParams("flag", "getcategorybytype")
                 .addParams("cate_type", item1[i])
                 .build()
-                .connTimeOut(5000)
-                .readTimeOut(5000)
-                .writeTimeOut(5000)
+                .connTimeOut(1000)
+                .readTimeOut(1000)
+                .writeTimeOut(1000)
                 .execute(new StringCallback() {
                     private JSONArray array;
                     private JSONObject object;

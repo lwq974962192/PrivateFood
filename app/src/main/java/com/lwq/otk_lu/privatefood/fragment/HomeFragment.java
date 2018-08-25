@@ -209,9 +209,9 @@ public class HomeFragment extends Fragment {
                 .url(server)
                 .addParams("flag", "getfoodmemus")
                 .build()
-                .connTimeOut(10000)
-                .readTimeOut(10000)
-                .writeTimeOut(10000)
+                .connTimeOut(1000)
+                .readTimeOut(1000)
+                .writeTimeOut(1000)
                 .execute(new StringCallback() {
                     @Override
                     public void onBefore(Request request, int id) {
@@ -230,7 +230,6 @@ public class HomeFragment extends Fragment {
                         super.onAfter(id);
                         dialog.dismiss();
                         if (list.size() > 0) {
-                            Log.d("lotk", list.toString());
                             BoutiqueAdapter adapter = new BoutiqueAdapter(getActivity(), list);
                             boutiqueList.setAdapter(adapter);
                             if (frame != null) {
